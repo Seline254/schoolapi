@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     name:{type:String},
     email:{type:String,required:true, unique:true},
-    password:{type:String,required},
+    password:{type:String,required:true},
     isActive:{type:Boolean,default:true},
     role:{type:String,enum:['admin','teacher','parent'],required:true},
     teacher:{type:mongoose.Schema.Types.ObjectId,ref:'Teacher', default:null},
