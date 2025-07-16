@@ -14,8 +14,13 @@ app.use("/uploads",express.static)
 
 // login/register routes
 const userAuth = require('./routes/loginRoute')
-app.use('/user/Auth',userAuth)
-
+app.use('/api/user/Auth',userAuth)
+// classrooms
+const classrooms = require('./routes/classroomRoutes')
+app.use('/api/classrooms',classrooms)
+// Teachers
+const teachers = require('./routes/teacherRoutes')
+app.use('/api/teachers',teachers)
 
 // connection to the database
 mongoose.connect(process.env.MONGO_URI)

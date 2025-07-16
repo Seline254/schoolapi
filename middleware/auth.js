@@ -6,7 +6,7 @@ const auth = (req,res,next)=>{
     // extract authorization header
     const authHeader = req.headers.authorization
     // get actual token from the header
-    const token = authHeader && authHeader.split(' ')
+    const token = authHeader && authHeader.split(' ')[1]
 
     // check if we have a token 
     if(!token) return res.status(404).json({message:"No token provided"})
@@ -27,6 +27,7 @@ const auth = (req,res,next)=>{
 // middleware to authorize access based on the user role
 // accepts any number of allowed roles(e.g 'admin',teacher')
 // ...params - accepts any number of arguments and automatically puts them into an array
+// higher order function- a function that returns another functionnn
 const authorizeRoles = (...allowedRoles)=>{
     return(req,res,next)=>{
         if(!req.user || !allowedRoles.includes(req.user.role)){

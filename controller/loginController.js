@@ -1,6 +1,7 @@
 const {User} = require("../model/schoolDB")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
 // register logic
 exports.registerAdmin = async(req,res)=>{
     const{name,email,password,secretKey} = req.body
@@ -29,7 +30,6 @@ exports.registerAdmin = async(req,res)=>{
 
     res.status(201).json({message:"Admin account created",newUser})
 }
-
 // login user
 exports.login = async(req,res)=>{
     const {email,password}= req.body
