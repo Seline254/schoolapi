@@ -21,7 +21,9 @@ app.use('/api/classrooms',classrooms)
 // Teachers
 const teachers = require('./routes/teacherRoutes')
 app.use('/api/teachers',teachers)
-
+// assignment
+const assignment = require('./routes/assignmentRoute')
+app.use('/assignment',assignment)
 // connection to the database
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>console.log("Mongo Connected"))

@@ -141,3 +141,19 @@ exports.getMyClasses = async (req,res)=>{
         res.status(500).json({message:error.message})
     }
 }
+
+//get teacher's assignments
+//includes clasroom and teacher information
+exports.getAllAssignments=async(req,res)=>{
+    try {
+        const userId=req.user.userId
+        const user=await User.findById(userId)
+        .populate('teacher')
+        const assignments=await Assignment.find({postedBy:user.teacher._id})
+        .populate("classroom","name gradeLevel classYear")
+        .populate("postedBy","name email phone")
+        res.status(200).json(assignments)
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+}
