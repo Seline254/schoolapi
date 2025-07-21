@@ -15,15 +15,23 @@ app.use("/uploads",express.static)
 // login/register routes
 const userAuth = require('./routes/loginRoute')
 app.use('/api/user/Auth',userAuth)
+
 // classrooms
 const classrooms = require('./routes/classroomRoutes')
 app.use('/api/classrooms',classrooms)
+
 // Teachers
 const teachers = require('./routes/teacherRoutes')
 app.use('/api/teachers',teachers)
+
 // assignment
 const assignment = require('./routes/assignmentRoute')
 app.use('/assignment',assignment)
+
+// Parents
+const parent = require('./routes/parentRoute')
+app.use('/api/parent',parent)
+
 // connection to the database
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>console.log("Mongo Connected"))
