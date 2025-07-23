@@ -94,3 +94,23 @@ exports.updateStudent = async(req,res)=>{
         res.status(500).json({message:error.message})
     }
 }
+// Delete student
+exports.deleteStudent =async(req,res)=>{
+    try {
+        const deletedStudent = await Student.findByIdAndDelete(req.params.id)
+        if(!deletedStudent) return res.status(404).json({message:"Student not found."})
+        // Remove the student from classroom
+        /*await Classroom.updateMany(
+            {students:deletedStudent._id},
+            {$pull:{students:deletedStudent._id}}
+        )*/
+       await Classroom.findByIdAndUpdate(
+        deletedStudent.classroom,
+        {$pull:{students:deletedStudent._id}},
+        {new:true}
+       )
+        res.status(200).json({message:"Student deleted successfully"})
+    } catch (error) {
+        res.status(500).json({message:error.message})
+    }
+}
