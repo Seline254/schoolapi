@@ -40,6 +40,10 @@ app.use('/api/student',student)
 const admindash = require('./routes/adminRoute')
 app.use('/api/admindash',admindash)
 
+// admindash routes
+const teacherdash = require('./routes/teacherRoute')
+app.use('/api/teacherdash',teacherdash)
+
 // connection to the database
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>console.log("Mongo Connected"))
